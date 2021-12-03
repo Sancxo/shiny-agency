@@ -5,12 +5,14 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './index.css';
 
 // Components
-import Header from './pages/Layout/Header';
+import Header from './components/Header';
+import Error from './components/Error';
+
+//Pages
 import Home from './pages/Home';
 import Survey from './pages/Survey';
 import Results from './pages/Results';
 import Freelances from './pages/Freelances';
-import Error from './pages/Error';
 
 ReactDOM.render(
   <React.StrictMode>
