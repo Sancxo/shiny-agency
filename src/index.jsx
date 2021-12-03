@@ -1,17 +1,27 @@
+import reportWebVitals from './reportWebVitals';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './index.css';
+
+// Components
+import Header from './pages/Layout/Header';
 import Home from './pages/Home';
 import Survey from './pages/Survey';
-import reportWebVitals from './reportWebVitals';
+import Results from './pages/Results';
+import Freelances from './pages/Freelances';
+import Error from './pages/Error';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
+      <Header />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/survey' element={<Survey />} />
+        <Route path='/survey/:questionNumber' element={<Survey />} />
+        <Route path='/results' element={<Results />} />
+        <Route path='/freelances' element={<Freelances />} />
+        <Route path='*' element={<Error />} />
       </Routes>
     </Router>
   </React.StrictMode>,
