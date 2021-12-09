@@ -1,30 +1,32 @@
 import reportWebVitals from './reportWebVitals';
-import React from 'react';
+import React, {Suspense, lazy} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './index.css';
 
 // Components
 import Header from './components/Header';
-import Error from './components/Error';
+const Error = lazy(() => import('./components/Error'));
 
 //Pages
-import Home from './pages/Home';
-import Survey from './pages/Survey';
-import Results from './pages/Results';
-import Freelances from './pages/Freelances';
+const Home = lazy(() => import('./pages/Home'));
+const Survey = lazy(() => import('./pages/Survey'));
+const Results = lazy(() => import('./pages/Results'));
+const Freelances = lazy(() => import('./pages/Freelances'));
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/survey/:questionNumber' element={<Survey />} />
-        <Route path='/results' element={<Results />} />
-        <Route path='/freelances' element={<Freelances />} />
-        <Route path='*' element={<Error />} />
-      </Routes>
+      <Suspense fallback={<div>Chargement en cours</div>}>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/survey/:questionNumber' element={<Survey />} />
+          <Route path='/results' element={<Results />} />
+          <Route path='/freelances' element={<Freelances />} />
+          <Route path='*' element={<Error />} />
+        </Routes>
+      </Suspense>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
