@@ -1,4 +1,5 @@
 import reportWebVitals from './reportWebVitals';
+import { createGlobalStyle } from 'styled-components';
 import React, {Suspense, lazy} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -14,9 +15,17 @@ const Survey = lazy(() => import('./pages/Survey'));
 const Results = lazy(() => import('./pages/Results'));
 const Freelances = lazy(() => import('./pages/Freelances'));
 
+// Styled Component
+const GlobalStyle = createGlobalStyle`
+  * {
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
+  }
+`
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>
+      <GlobalStyle />
       <Header />
       <Suspense fallback={<div>Chargement en cours</div>}>
         <Routes>
