@@ -1,12 +1,14 @@
 import reportWebVitals from './reportWebVitals';
-import { createGlobalStyle } from 'styled-components';
-import React, {Suspense, lazy} from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from './utils/context';
 import './index.css';
 
 // Components
 import Header from './components/Header';
+import Footer from './components/Footer';
+import GlobalStyle from './utils/style/GlobalStyle';
 const Error = lazy(() => import('./components/Error'));
 
 //Pages
@@ -15,27 +17,23 @@ const Survey = lazy(() => import('./pages/Survey'));
 const Results = lazy(() => import('./pages/Results'));
 const Freelances = lazy(() => import('./pages/Freelances'));
 
-// Styled Component
-const GlobalStyle = createGlobalStyle`
-  * {
-    font-family: 'Trebuchet MS', Helvetica, sans-serif;
-  }
-`
-
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <GlobalStyle />
-      <Header />
-      <Suspense fallback={<div>Chargement en cours</div>}>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/survey/:questionNumber' element={<Survey />} />
-          <Route path='/results' element={<Results />} />
-          <Route path='/freelances' element={<Freelances />} />
-          <Route path='*' element={<Error />} />
-        </Routes>
-      </Suspense>
+      <ThemeProvider>
+        <GlobalStyle />
+        <Header />
+        <Suspense fallback={<div>Chargement en cours</div>}>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/survey/:questionNumber' element={<Survey />} />
+            <Route path='/results' element={<Results />} />
+            <Route path='/freelances' element={<Freelances />} />
+            <Route path='*' element={<Error />} />
+          </Routes>
+        </Suspense>
+        <Footer />
+      </ThemeProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
