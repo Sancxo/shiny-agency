@@ -28,7 +28,7 @@ const CardWrapper = styled.div`
     }
 `
 
-function Card({label, title, picture}) {
+function Card({ label, title, picture }) {
     return (
         <CardWrapper>
             <CardLabel>{label}</CardLabel>
@@ -45,7 +45,7 @@ Card.propTypes = {
 }
 
 Card.defaultProps = {
-    title: "", 
+    title: "",
     label: "",
     picture: DefaultPicture
 }
