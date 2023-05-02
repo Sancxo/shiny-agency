@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import Card from '../../components/Card';
-import { useEffect, useState } from 'react';
 import { Loader } from "../../utils/style/Atoms";
 import colors from '../../utils/style/colors';
+import { useFetch } from '../../utils/hooks';
 
 // Styled component
 const CardsContainer = styled.div`
@@ -30,22 +30,8 @@ const PageSubtitle = styled.h2`
 `
 
 function Freelances() {
-    const [freelanceProfiles, setFreelanceProfiles] = useState([]);
-    const [isDataLoading, setDataLoading] = useState(false);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        async function fetchFreelances() {
-            setDataLoading(true);
-            try {
-                const resp = await fetch('http://localhost:8000/freelances');
-                const { freelancersList } = await resp.json();
-                setFreelanceProfiles(freelancersList);
-            } catch (error) { setError(error); }
-            finally { setDataLoading(false); }
-        }
-        fetchFreelances();
-    }, []);
+    const { data, isLoading, error } = useFetch('http://localhost:8000/freelances');
+    const { freelancersList } = data;
 
     if (error) return <p>Oups ... Un problème a eu lieu.</p>
 
@@ -55,10 +41,10 @@ function Freelances() {
             <PageSubtitle>
                 Chez Shiny nous réunissons les meilleurs profils pour vous.
             </PageSubtitle>
-            {isDataLoading ?
+            {isLoading ?
                 <Loader /> :
                 <CardsContainer>
-                    {freelanceProfiles.map((profile, index) => (
+                    {freelancersList.map((profile, index) => (
                         <Card
                             key={`${profile.name}-${index}`}
                             label={profile.job}
