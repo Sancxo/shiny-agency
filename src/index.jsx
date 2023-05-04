@@ -2,7 +2,7 @@ import reportWebVitals from './reportWebVitals';
 import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { ThemeProvider } from './utils/context';
+import { SurveyProvider, ThemeProvider } from './utils/context';
 import './index.css';
 
 // Components
@@ -21,18 +21,20 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <ThemeProvider>
-        <GlobalStyle />
-        <Header />
-        <Suspense fallback={<div>Chargement en cours</div>}>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/survey/:questionNumber' element={<Survey />} />
-            <Route path='/results' element={<Results />} />
-            <Route path='/freelances' element={<Freelances />} />
-            <Route path='*' element={<Error />} />
-          </Routes>
-        </Suspense>
-        <Footer />
+        <SurveyProvider>
+          <GlobalStyle />
+          <Header />
+          <Suspense fallback={<div>Chargement en cours</div>}>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/survey/:questionNumber' element={<Survey />} />
+              <Route path='/results' element={<Results />} />
+              <Route path='/freelances' element={<Freelances />} />
+              <Route path='*' element={<Error />} />
+            </Routes>
+          </Suspense>
+          <Footer />
+        </SurveyProvider>
       </ThemeProvider>
     </Router>
   </React.StrictMode>,
