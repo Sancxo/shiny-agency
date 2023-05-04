@@ -1,10 +1,9 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import DarkLogo from '../../assets/dark-logo.png';
 import LightLogo from '../../assets/light-logo.png';
 import { StyledLink } from '../../utils/style/Atoms';
-import { ThemeContext } from '../../utils/context';
+import { useTheme } from '../../utils/hooks';
 
 // Styled component
 const HomeLogo = styled.img`
@@ -19,7 +18,7 @@ align-items: center;
 `
 
 function Header() {
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useTheme();
 
     return (
         <NavContainer>
