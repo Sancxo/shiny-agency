@@ -13,16 +13,6 @@ describe('Card component', () => {
     const img = screen.getByRole('img');
     expect(img.getAttribute('src')).toBe('test-card-img.png');
   })
-  it('should render a tilte as passed in props', () => {
-    render(
-      <ThemeProvider>
-        <Card label="Test card label" title="Test card title" picture="test-card-img.png" />
-      </ThemeProvider>
-    );
-
-    const title = screen.getByText('Test card title');
-    expect(title).toBeTruthy();
-  })
   it('should render a title as passed in props, theb add a profile as favorite, then remove it from favorites', () => {
     render(
       <ThemeProvider>
