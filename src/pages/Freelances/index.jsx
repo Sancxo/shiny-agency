@@ -42,7 +42,7 @@ function Freelances() {
                 Chez Shiny nous réunissons les meilleurs profils pour vous.
             </PageSubtitle>
             {isLoading ?
-                <Loader /> :
+                <Loader data-testid="loader" /> :
                 <CardsContainer>
                     {freelancersList.map((profile, index) => (
                         <Card
